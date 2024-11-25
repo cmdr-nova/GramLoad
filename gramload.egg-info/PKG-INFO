@@ -1,10 +1,8 @@
 Metadata-Version: 2.1
 Name: gramload
 Version: 1.0.0
-Summary: UNKNOWN
-Home-page: UNKNOWN
-License: UNKNOWN
-Platform: UNKNOWN
-
-UNKNOWN
+Summary: A simple Instagram downloader tool.
+Home-page: https://nova.mkultra.monster
+License: Attribution
+Platform: Linux
 
