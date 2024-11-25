@@ -36,7 +36,10 @@ jobs:
         env:
           PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          echo "[pypi]" > ~/.pypirc
+          echo "[distutils]" > ~/.pypirc
+          echo "index-servers =" >> ~/.pypirc
+          echo "    pypi" >> ~/.pypirc
+          echo "[pypi]" >> ~/.pypirc
           echo "username = __token__" >> ~/.pypirc
           echo "password = $PYPI_API_TOKEN" >> ~/.pypirc
-          twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+          twine upload dist/*
