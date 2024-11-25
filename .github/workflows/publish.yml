@@ -46,6 +46,11 @@ jobs:
       - name: Verify .pypirc file
         run: cat ~/.pypirc
 
+      - name: Print environment variables
+        run: env
+
       - name: Publish package
-        run: |
-          TWINE_USERNAME=__token__ TWINE_PASSWORD=${{ secrets.PYPI_API_TOKEN }} twine upload dist/*
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: twine upload dist/*
