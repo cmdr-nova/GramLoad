@@ -21,10 +21,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install setuptools wheel twine
+
+      - name: Verify installations
+        run: |
           python -m pip show pip
           python -m pip show setuptools
           python -m pip show wheel
           python -m pip show twine
+          python -m pip list
 
       - name: Build package
         run: python setup.py sdist bdist_wheel
