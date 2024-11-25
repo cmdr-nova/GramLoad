@@ -32,14 +32,19 @@ jobs:
           python -m pip list
           python setup.py sdist bdist_wheel
 
-      - name: Publish package
+      - name: Create .pypirc file
         env:
           PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          echo "[distutils]" > ~/.pypirc
-          echo "index-servers =" >> ~/.pypirc
-          echo "    pypi" >> ~/.pypirc
-          echo "[pypi]" >> ~/.pypirc
-          echo "username = __token__" >> ~/.pypirc
-          echo "password = $PYPI_API_TOKEN" >> ~/.pypirc
-          twine upload dist/*
+          echo "[pypi]" > ~/.pypirc
+          echo "  username = __token__" >> ~/.pypirc
+          echo "  password = $PYPI_API_TOKEN" >> ~/.pypirc
+
+      - name: Verify .pypirc file
+        run: cat ~/.pypirc
+
+      - name: Publish package
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: twine upload dist/*
